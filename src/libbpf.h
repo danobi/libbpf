@@ -147,6 +147,7 @@ LIBBPF_API unsigned int bpf_object__kversion(const struct bpf_object *obj);
 struct btf;
 LIBBPF_API struct btf *bpf_object__btf(const struct bpf_object *obj);
 LIBBPF_API int bpf_object__btf_fd(const struct bpf_object *obj);
+LIBBPF_API int bpf_object__load_vmlinux_btf(struct bpf_object *obj);
 
 LIBBPF_API struct bpf_program *
 bpf_object__find_program_by_title(const struct bpf_object *obj,

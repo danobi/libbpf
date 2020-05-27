@@ -2477,7 +2477,7 @@ static inline bool libbpf_prog_needs_vmlinux_btf(struct bpf_program *prog)
 	return false;
 }
 
-static int bpf_object__load_vmlinux_btf(struct bpf_object *obj)
+int bpf_object__load_vmlinux_btf(struct bpf_object *obj)
 {
 	struct bpf_program *prog;
 	int err;
@@ -5285,6 +5285,8 @@ int bpf_program__load(struct bpf_program *prog, char *license, __u32 kern_ver)
 {
 	int err = 0, fd, i, btf_id;
 
+        printf("XXX HERE\n");
+
 	if ((prog->type == BPF_PROG_TYPE_TRACING ||
 	     prog->type == BPF_PROG_TYPE_LSM ||
 	     prog->type == BPF_PROG_TYPE_EXT) && !prog->attach_btf_id) {
@@ -7029,6 +7031,8 @@ static int libbpf_find_attach_btf_id(struct bpf_program *prog)
 
 	if (!name)
 		return -EINVAL;
+
+	bpf_object__load_vmlinux_btf(prog->obj);
 
 	for (i = 0; i < ARRAY_SIZE(section_defs); i++) {
 		if (!section_defs[i].is_attach_btf)
